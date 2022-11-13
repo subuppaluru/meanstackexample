@@ -1,20 +1,17 @@
-import * as dotenv from "dotenv";
+
 import cors from "cors";
 import express from "express";
 import { connectToDatabase } from "./database";
 import { employeeRouter } from "./employee.routes";
 
+
 // Load environment variables from the .env file, where the ATLAS_URI is configured
-dotenv.config();
 
-const { ATLAS_URI } = process.env;
 
-if (!ATLAS_URI) {
-    console.error("No ATLAS_URI environment variable has been defined in config.env");
-    process.exit(1);
-}
+//const uri : string = 'mongodb://127.0.0.1:27017/tutorial_db'
+const uri : string = 'mongodb://127.0.0.1:27017/employee_db'
 
-connectToDatabase(ATLAS_URI)
+connectToDatabase(uri)
     .then(() => {
         const app = express();
         app.use(cors());
